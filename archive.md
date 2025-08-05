@@ -30,7 +30,3 @@ permalink: /archive/
     
 
   {% endfor %}
-
-
-
-
