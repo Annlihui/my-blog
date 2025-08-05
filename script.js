@@ -1,128 +1,78 @@
-{\rtf1\ansi\ansicpg936\cocoartf2761
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的博客</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="nav-link active">首页</a>
+                <a href="#" class="nav-link">文章</a>
+                <a href="#" class="nav-link">关于</a>
+                <a href="#" class="nav-link">联系</a>
+            </nav>
+        </header>
 
-\f0\fs24 \cf0 // \uc0\u23548 \u33322 \u33756 \u21333 \u20999 \u25442 \
-const navToggle = document.querySelector('.nav-toggle');\
-const navMenu = document.querySelector('.nav-menu');\
-\
-navToggle.addEventListener('click', () => \{\
-    navMenu.classList.toggle('active');\
-    navToggle.classList.toggle('active');\
-\});\
-\
-// \uc0\u28857 \u20987 \u23548 \u33322 \u38142 \u25509 \u21518 \u20851 \u38381 \u33756 \u21333 \
-document.querySelectorAll('.nav-link').forEach(link => \{\
-    link.addEventListener('click', () => \{\
-        navMenu.classList.remove('active');\
-        navToggle.classList.remove('active');\
-    \});\
-\});\
-\
-// \uc0\u24179 \u28369 \u28378 \u21160 \
-document.querySelectorAll('a[href^="#"]').forEach(anchor => \{\
-    anchor.addEventListener('click', function (e) \{\
-        e.preventDefault();\
-        const target = document.querySelector(this.getAttribute('href'));\
-        if (target) \{\
-            target.scrollIntoView(\{\
-                behavior: 'smooth',\
-                block: 'start'\
-            \});\
-        \}\
-    \});\
-\});\
-\
-// \uc0\u28378 \u21160 \u26102 \u30340 \u23548 \u33322 \u26639 \u25928 \u26524 \
-window.addEventListener('scroll', () => \{\
-    const navbar = document.querySelector('.navbar');\
-    if (window.scrollY > 100) \{\
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';\
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';\
-    \} else \{\
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';\
-        navbar.style.boxShadow = 'none';\
-    \}\
-\});\
-\
-// \uc0\u25991 \u31456 \u21345 \u29255 \u21160 \u30011 \
-const observerOptions = \{\
-    threshold: 0.1,\
-    rootMargin: '0px 0px -100px 0px'\
-\};\
-\
-const observer = new IntersectionObserver((entries) => \{\
-    entries.forEach(entry => \{\
-        if (entry.isIntersecting) \{\
-            entry.target.classList.add('animate');\
-        \}\
-    \});\
-\}, observerOptions);\
-\
-document.querySelectorAll('.post-card').forEach(card => \{\
-    observer.observe(card);\
-\});\
-\
-// \uc0\u36820 \u22238 \u39030 \u37096 \u25353 \u38062 \
-const backToTop = document.getElementById('backToTop');\
-\
-window.addEventListener('scroll', () => \{\
-    if (window.scrollY > 300) \{\
-        backToTop.classList.add('show');\
-    \} else \{\
-        backToTop.classList.remove('show');\
-    \}\
-\});\
-\
-backToTop.addEventListener('click', () => \{\
-    window.scrollTo(\{\
-        top: 0,\
-        behavior: 'smooth'\
-    \});\
-\});\
-\
-// \uc0\u25628 \u32034 \u21151 \u33021 \
-const searchInput = document.getElementById('searchInput');\
-const postsGrid = document.getElementById('postsGrid');\
-const postCards = document.querySelectorAll('.post-card');\
-\
-searchInput.addEventListener('input', (e) => \{\
-    const searchTerm = e.target.value.toLowerCase();\
-    \
-    postCards.forEach(card => \{\
-        const title = card.querySelector('.post-title').textContent.toLowerCase();\
-        const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();\
-        const category = card.querySelector('.post-category').textContent.toLowerCase();\
-        \
-        if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) \{\
-            card.style.display = 'block';\
-        \} else \{\
-            card.style.display = 'none';\
-        \}\
-    \});\
-\});\
-\
-// \uc0\u32852 \u31995 \u34920 \u21333 \u25552 \u20132 \
-document.querySelector('.contact-form').addEventListener('submit', (e) => \{\
-    e.preventDefault();\
-    alert('\uc0\u24863 \u35874 \u24744 \u30340 \u30041 \u35328 \u65281 \u25105 \u20250 \u23613 \u24555 \u22238 \u22797 \u24744 \u12290 ');\
-    e.target.reset();\
-\});\
-\
-// \uc0\u28155 \u21152 \u39029 \u38754 \u21152 \u36733 \u21160 \u30011 \
-window.addEventListener('load', () => \{\
-    document.body.classList.add('loaded');\
-\});\
-\
-// \uc0\u40736 \u26631 \u36319 \u38543 \u25928 \u26524 \u65288 \u21487 \u36873 \u65289 \
-document.addEventListener('mousemove', (e) => \{\
-    const cursor = document.querySelector('.cursor');\
-    if (cursor) \{\
-        cursor.style.left = e.clientX + 'px';\
-        cursor.style.top = e.clientY + 'px';\
-    \}\
-\});\
-}
+        <main class="main">
+            <section class="hero">
+                <h1 class="hero-title">欢迎来到我的博客</h1>
+                <p class="hero-subtitle">分享技术、生活和思考</p>
+            </section>
+
+            <section class="posts">
+                <h2 class="section-title">最新文章</h2>
+                <div class="posts-grid">
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <span class="post-date">2024年1月15日</span>
+                            <span class="post-category">技术</span>
+                        </div>
+                        <h3 class="post-title">构建现代Web应用的最佳实践</h3>
+                        <p class="post-excerpt">探讨现代Web开发中的关键技术和最佳实践，包括性能优化、用户体验设计等方面...</p>
+                        <a href="#" class="post-link">阅读更多 →</a>
+                    </article>
+
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <span class="post-date">2024年1月10日</span>
+                            <span class="post-category">思考</span>
+                        </div>
+                        <h3 class="post-title">关于学习与成长的思考</h3>
+                        <p class="post-excerpt">分享我在学习和个人成长过程中的一些感悟和经验，希望能对大家有所帮助...</p>
+                        <a href="#" class="post-link">阅读更多 →</a>
+                    </article>
+
+                    <article class="post-card">
+                        <div class="post-meta">
+                            <span class="post-date">2024年1月5日</span>
+                            <span class="post-category">生活</span>
+                        </div>
+                        <h3 class="post-title">极简主义的生活方式</h3>
+                        <p class="post-excerpt">如何通过极简主义来改善生活质量，减少不必要的物质和精神负担...</p>
+                        <a href="#" class="post-link">阅读更多 →</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="about">
+                <h2 class="section-title">关于我</h2>
+                <div class="about-content">
+                    <p>我是一名热爱技术和写作的开发者，喜欢分享知识和经验。</p>
+                    <p>在这里，我会记录我的学习历程、技术心得和生活感悟。</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 我的博客. 保留所有权利.</p>
+        </footer>
+    </div>
+</body>
+</html>
